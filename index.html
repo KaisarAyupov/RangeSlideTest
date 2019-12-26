@@ -60,7 +60,7 @@
         drag_interval: true,
         min_interval: null,
         max_interval: null,
-		postfix: "y",
+        prettify_enabled: false,
 		
     });
 </script>
@@ -73,16 +73,16 @@
 
     $("#years20").ionRangeSlider({
         type: "double",
+        skin: "square",
         grid: true,
-		grid_snap: true,
+        grid_snap: false,
         from: my_from,
         to: my_to,
         values: years20values,
         drag_interval: true,
         min_interval: null,
         max_interval: null,
-		postfix: "y"
-		
+        prettify_enabled: false,		
     });
 </script>
 </html>
