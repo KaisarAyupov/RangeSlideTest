@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Range Slider</title>
-    
+    <title>Breakthrough Sardoba</title>
+
     <!--Plugin CSS file with desired skin-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--jQuery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/ion.rangeSlider.min.js"></script>
@@ -18,74 +19,15 @@
     <link href="css/ion.rangeSlider.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="jumbotron p-md-1 text-white rounded bg-info mt-0">
-            <div class="col-md-12 px-0">
-                <h5 class="display-4 font-italic">Прорыв дамбы в Узбекистане & Наводнение на Сырдарье</h5>
-            </div>
+    <div class="container">
+        <div class="card-body text-white bg-info mb-3">
+            <h4 class="card-title">Прорыв дамбы в Узбекистане</h4>
+            <p class="card-text"><strong>Наводнение на Сырдарье</strong> <em> - Используйте слайдер для сравнения двух изображений</em></p>
         </div>
-<iframe class="responsive-iframe" src="https://www.planet.com/compare/?id=breakthrough-of-the-dam-of-the-sardoba-reservoir-esPob16ZR" />	    
-	</div>
-	<div class="container">
-  <iframe class="responsive-iframe" src="https://storage.googleapis.com/planet-t2/breakthrough-of-the-dam-of-the-sardoba-reservoir-t-Vi5da16ZR/movie.mp4"></iframe>
-</div>
-    @*<main role="main" class="container pb-4">
-        <div class="row">
-        	<div class="alert alert-success m-5" role="alert">
-            	 <a class="alert-link">for 10 years</a>
-            </div>
-            <div class="col-md-12" style="cursor: pointer;">
-                <input id="years10" class="js-range-slider" name="my_range" value="" />
-            </div>
-            <div class="alert alert-info m-5" role="alert">
-            	<a class="alert-link">for 20 years</a>
-            </div>
-            <div class="col-md-12" style="cursor: pointer;">
-                <input id="years20" class="js-range-slider" name="my_range" value="" />
-            </div>
-        </div><!-- /.row -->
-    </main><!-- /.container -->*@
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.planet.com/compare/?id=breakthrough-of-the-dam-of-the-sardoba-reservoir-esPob16ZR" allowfullscreen></iframe>
+        </div>
+        <footer class="blockquote-footer">использован снимок слева 2020/04/30 и справо 2020/05/03 <cite title="Source Title">PlanetScope Ortho Tile</cite></footer>
+    </div>  
 </body>
-<script>
-    var years10values = [1901, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2030, 2040, 2050, 2060, 2070, 2080, 2090, 2100];
-
-    // be careful! FROM and TO should be index of values array
-    var my_from = years10values.indexOf(2000);
-    var my_to = years10values.indexOf(2010);
-
-    $("#years10").ionRangeSlider({
-        type: "double",
-        grid: true,
-		grid_snap: true,
-        from: my_from,
-        to: my_to,
-        values: years10values,
-        drag_interval: true,
-        min_interval: null,
-        max_interval: null,
-        prettify_enabled: false,
-		
-    });
-</script>
-<script>
-    var years20values = [1901, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2030, 2040, 2050, 2060, 2070, 2080, 2090, 2100];
-
-    // be careful! FROM and TO should be index of values array
-    var my_from = years20values.indexOf(2000);
-    var my_to = years20values.indexOf(2020);
-
-    $("#years20").ionRangeSlider({
-        type: "double",
-        skin: "square",
-        grid: true,
-        grid_snap: false,
-        from: my_from,
-        to: my_to,
-        values: years20values,
-        drag_interval: true,
-        min_interval: null,
-        max_interval: null,
-        prettify_enabled: false,		
-    });
-</script>
 </html>
