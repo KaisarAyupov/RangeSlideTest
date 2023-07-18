@@ -2447,3 +2447,68 @@
     }());
 
 }));
+
+/* ------ Functions ------ */
+
+// Format duration
+function formatElapsedTime(numSeconds, type) {
+    if (IsEmpty(type)) { type = 1 };
+    if (TypeOf(numSeconds) != 'Number' || IsEmpty(numSeconds)) { return '' }
+    var days = Floor(numSeconds/(60*60*24),0)
+    if (type == 1) {
+        var relativeDate = Date(0,0,0,0,0,numSeconds);
+        var elapsedTime = When(
+            numSeconds < 60*60, Text(relativeDate,'mm:ss'),
+            numSeconds < 60*60*24, Text(relativeDate,'H:mm:ss'),
+            days + 'd ' + Text(relativeDate,'H:mm')
+            );
+        return elapsedTime;
+    }
+    if (type == 2) {
+        var relativeDate = Date(0,0,0,0,0,numSeconds);
+        var elapsedTime = When(
+            numSeconds < 60, Text(relativeDate,'s') + 's',
+            numSeconds < 60*60, Text(relativeDate,'m') + 'm',
+            numSeconds < 60*60*24, Text(relativeDate,'H') + 'h ' + Text(relativeDate,'m') + 'm',
+            days + 'd '
+            );
+        return elapsedTime; 
+    }
+}
+
+/* ------ Account for Active Stages ------ */
+// Current Time
+var currentTime = Now();
+
+// Get incident status
+var responseStartedIsNull = Boolean(isEmpty($feature["Response_Started_Date"]));
+var responseStarted = Boolean($feature["Response_Started_Date"] < currentTime && !responseStartedIsNull);
+var sinceResponseStarted = DateDiff(currentTime, $feature["Response_Started_Date"], "minute");
+var assignedIsNull = Boolean(isEmpty($feature["Assigned_Date"]));
+var assigned = Boolean($feature["Assigned_Date"] < currentTime && !assignedIsNull);
+var enrouteIsNull = Boolean(isEmpty($feature["Enroute_Date"]));
+var enroute = Boolean($feature["Enroute_Date"] < currentTime && !enrouteIsNull);
+var onSceneIsNull = Boolean(isEmpty($feature["Arrived_At_Scene_Date"]));
+var onScene = Boolean($feature["Arrived_At_Scene_Date"] < currentTime && !onSceneIsNull);
+var clearedIsNull = Boolean(isEmpty($feature["Call_Cleared_Date"]));
+var cleared = Boolean($feature["Call_Cleared_Date"] < currentTime && !clearedIsNull);
+
+var br = TextFormatting.NewLine;
+
+/* ------ KPI's ------ */
+
+var KPIText = "";
+if (assigned) { KPIText = "Dispatch: " + formatElapsedTime($feature["Dispatch_Time_Sec"],1) }
+if (enroute) { KPIText += br + "Turnout: " + formatElapsedTime($feature["Turnout_Time_Sec"],1) }
+if (onScene) { 
+    KPIText += br + "Response: " + formatElapsedTime($feature["Response_Travel_Time"]*60,1); 
+    KPIText += br + "Overall: " + formatElapsedTime($feature["Response_Started_To_Arrival_Tim"]*60,1); 
+}
+if (IsEmpty(KPIText)) { KPIText = 'Pending' };
+
+
+// Return KPIs
+if ( responseStarted ) {
+    return KPIText
+}
+return 'Pending'
